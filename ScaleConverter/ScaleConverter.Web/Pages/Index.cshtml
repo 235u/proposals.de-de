@@ -1,0 +1,74 @@
+﻿@page
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Maßstabsumrechner</title>
+    <link href="~/favicon.ico" rel="icon" asp-append-version="true">
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <main class="container">
+        @*See: https://stackoverflow.com/questions/5392853/html-css-denoting-a-preferred-place-for-a-line-break*@
+        <h1 class="display-4 mt-3">Maßstabs&#8203;umrechner</h1>
+        <p class="lead">Im Prinzip ist es super-simpel.</p>
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="scale-value">Maßstab</label>
+                <div class="input-group">
+                    <input type="number" class="form-control custom-control text-right" value="1" readonly />
+                    <select class="custom-select" id="scale-value">
+                        <option>1</option>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option selected>100</option>
+                        <option>250</option>
+                        <option>500</option>
+                        <option>1000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg">
+                <label for="first-value">Kartenstrecke</label>
+                <div class="input-group">
+                    <input class="form-control custom-control text-right" id="first-value" type="number" min="0" value="1" />
+                    <select class="custom-select" id="first-unit">
+                        <option value="km">Kilometer</option>
+                        <option value="m">Meter</option>
+                        <option value="cm" selected>Zentimeter</option>
+                        <option value="mi">Meile(n)</option>
+                        <option value="yd">Yard</option>
+                        <option value="ft">Fuß</option>
+                        <option value="in">Zoll</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg">
+                <label for="second-value">Naturstrecke</label>
+                <div class="input-group">
+                    <input class="form-control custom-control text-right" id="second-value" type="number" min="0" value="1" />
+                    <select class="custom-select" id="second-unit">
+                        <option value="km">Kilometer</option>
+                        <option value="m" selected>Meter</option>
+                        <option value="cm">Zentimeter</option>
+                        <option value="mi">Meile(n)</option>
+                        <option value="yd">Yard</option>
+                        <option value="ft">Fuß</option>
+                        <option value="in">Zoll</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <footer class="text-right text-muted mb-3">
+            © 2020 <a class="text-dark" href="https://www.235u.net">Actin Uranium</a> |
+            <a class="text-dark" href="https://github.com/235u/proposals/tree/master/ScaleConverter">GitHub</a>
+        </footer>
+    </main>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
