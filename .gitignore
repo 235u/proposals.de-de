@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /ScaleConverter/ScaleConverter.Web/wwwroot/lib/bootstrap
+/PdfSplitter/src/PdfSplitter.Web/Hangfire.db
