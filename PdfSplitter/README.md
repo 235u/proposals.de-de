@@ -181,10 +181,3 @@ public class SplitterTests
     }
 }
 ```
-
-## Abhängigkeiten
-
-- [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0) (.NET Standard 2.0 / ASP.NET Core 5.0)
-- [PdfSharp](http://www.pdfsharp.net/MainPage.ashx) (.NET Standard 2.0, via NuGet)
-- Hangfire (via NuGet)
-- 
