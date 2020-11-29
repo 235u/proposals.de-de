@@ -1,4 +1,4 @@
-﻿using PdfSharp.Pdf;
+using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Collections.Generic;
 using System.IO;
@@ -30,9 +30,9 @@ namespace PdfSplitter
             }
         }
 
-        public static IEnumerable<string> GetInputFilePaths(string path)
+        public static IEnumerable<string> GetInputFilePaths(string directoryPath)
         {
-            var inputDirectorInfo = new DirectoryInfo(path);
+            var inputDirectorInfo = new DirectoryInfo(directoryPath);
             FileInfo[] inputFileInfos = inputDirectorInfo.GetFiles(SearchPattern);
             foreach (FileInfo inputFileInfo in inputFileInfos)
             {

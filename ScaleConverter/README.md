@@ -1,8 +1,8 @@
-# Maﬂstabsumrechner
+# Ma√üstabsumrechner
 
 S. https://www.twago.de/project/ma-stabsumrechner/154850/
 
-> Es geht darum einen Maﬂstabsumrechner tool einzubauen. (Siehe link: https://www.cactus2000.de/de/unit/masssca.shtml). Im prinzip ist es super simpel. Das Design des tools w¸rde ich vorschlagen - mir geht es eher um die Machbarkeitt des Umrechners.
+> Es geht darum einen Ma√üstabsumrechner tool einzubauen. (Siehe link: https://www.cactus2000.de/de/unit/masssca.shtml). Im prinzip ist es super simpel. Das Design des tools w√ºrde ich vorschlagen - mir geht es eher um die Machbarkeitt des Umrechners.
 
 ## Prototyp
 

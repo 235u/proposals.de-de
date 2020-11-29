@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace PdfSplitter.Web
 {
@@ -18,32 +18,27 @@ namespace PdfSplitter.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHangfireDashboard(string.Empty);
+                var options = new DashboardOptions
+                {
+                    DashboardTitle = "PDF Splitter",
+                    DisplayStorageConnectionString = false
+                };
+
+                endpoints.MapHangfireDashboard(string.Empty, options);
             });
 
             var options = new DailyCronJobOptions();
             IConfiguration configuration = app.ApplicationServices.GetService<IConfiguration>();
             configuration.GetSection(DailyCronJobOptions.DailyCronJob).Bind(options);
+            string absoluteDirectoryPath = new FileInfo(options.DirectoryPath).FullName;
 
             RecurringJob.AddOrUpdate(
-                () => Scan(options.DirectoryPath),
+                () => CronJob.Scan(absoluteDirectoryPath),
                 Cron.Daily(options.Hour, options.Minute));
-        }
-
-        public void Scan(string directoryPath)
-        {
-            foreach (string inputFilePath in Splitter.GetInputFilePaths(directoryPath))
-            {
-                BackgroundJob.Enqueue(() => Splitter.Split(inputFilePath));
-            }
         }
     }
 }

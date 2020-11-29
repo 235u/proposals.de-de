@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /ScaleConverter/ScaleConverter.Web/wwwroot/lib/bootstrap
 /PdfSplitter/src/PdfSplitter.Web/Hangfire.db
+/PdfSplitter/src/PdfSplitter.Tests/data/123.pdf

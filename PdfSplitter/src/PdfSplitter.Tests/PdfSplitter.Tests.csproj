@@ -4,6 +4,22 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <Authors>Nikita Sharov</Authors>
+
+    <Company>Actin Uranium</Company>
+
+    <Product>PDF Splitter</Product>
+
+    <Copyright>2020 Nikita Sharov</Copyright>
+
+    <PackageLicenseExpression>Copyright (c) 2020 Nikita Sharov</PackageLicenseExpression>
+
+    <PackageProjectUrl>https://github.com/235u/proposals.de-de/tree/master/PdfSplitter</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/235u/proposals.de-de/tree/master/PdfSplitter</RepositoryUrl>
+
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
