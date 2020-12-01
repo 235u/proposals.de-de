@@ -7,11 +7,11 @@ using System.Linq;
 namespace PdfSplitter.Tests
 {
     [TestClass]
-    public class SplitterTests
+    public sealed class SplitterTests
     {
-        private static readonly string DirectoryPath = @"..\..\..\data";
-        private static readonly string InputFilePath = $@"{DirectoryPath}\123_PB.pdf";
-        private static readonly string OutputFilePath = $@"{DirectoryPath}\123.pdf";
+        private static readonly string RelativeDirectoryPath = @"..\..\..\data";
+        private static readonly string RelativeInputFilePath = $@"{RelativeDirectoryPath}\123_PB.pdf";
+        private static readonly string RelativeOutputFilePath = $@"{RelativeDirectoryPath}\123.pdf";
 
         private static void OpenWithDefaultReader(string path)
         {
@@ -26,27 +26,27 @@ namespace PdfSplitter.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            if (File.Exists(OutputFilePath))
+            if (File.Exists(RelativeOutputFilePath))
             {
-                File.Delete(OutputFilePath);
+                File.Delete(RelativeOutputFilePath);
             }
         }
 
         [TestMethod]
         public void TestGetInputFilePaths()
         {
-            IEnumerable<string> inputFilePaths = Splitter.GetInputFilePaths(DirectoryPath);
-            string absolutePath = new FileInfo(InputFilePath).FullName;
-            Assert.IsTrue(inputFilePaths.Contains(absolutePath));
+            IEnumerable<string> inputFilePaths = Splitter.GetInputFilePaths(RelativeDirectoryPath);
+            string absoluteInputFilePath = new FileInfo(RelativeInputFilePath).FullName;
+            Assert.IsTrue(inputFilePaths.Contains(absoluteInputFilePath));
         }
 
         [TestMethod]
         [Ignore("Validated manually")]
         public void TestSplit()
         {
-            Splitter.Split(InputFilePath);
-            Assert.IsTrue(File.Exists(OutputFilePath));
-            OpenWithDefaultReader(OutputFilePath);
+            string absoluteOutputFilePath = Splitter.Split(RelativeInputFilePath);
+            Assert.IsTrue(File.Exists(absoluteOutputFilePath));
+            OpenWithDefaultReader(absoluteOutputFilePath);
         }
     }
 }

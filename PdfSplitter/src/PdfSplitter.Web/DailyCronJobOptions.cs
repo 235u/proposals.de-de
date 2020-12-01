@@ -1,6 +1,6 @@
-﻿namespace PdfSplitter.Web
+namespace PdfSplitter.Web
 {
-    public class DailyCronJobOptions
+    public sealed class DailyCronJobOptions
     {
         public const string DailyCronJob = nameof(DailyCronJob);
 

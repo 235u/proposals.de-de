@@ -21,7 +21,7 @@ S. https://www.twago.de/project/automatisches-pdf-splitting/163969/
 `Startup.cs`
 
 ```csharp
-public class Startup
+public sealed class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
@@ -29,7 +29,7 @@ public class Startup
         services.AddHangfireServer();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app)
     {
         app.UseDeveloperExceptionPage();
         app.UseRouting();
@@ -88,18 +88,20 @@ public static class Splitter
 
     static Splitter() => Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-    public static void Split(string inputFilePath)
+    public static string Split(string inputFilePath)
     {
+        string outputFilePath = GetOutputFilePath(inputFilePath);
         using (PdfDocument input = PdfReader.Open(inputFilePath, PdfDocumentOpenMode.Import))
         {
             PdfPage firstPage = input.Pages[0];
             using (var output = new PdfDocument())
             {
-                output.AddPage(firstPage);
-                string outputFilePath = GetOutputFilePath(inputFilePath);
+                output.AddPage(firstPage);                    
                 output.Save(outputFilePath);
             }
         }
+
+        return outputFilePath;
     }
 
     public static IEnumerable<string> GetInputFilePaths(string directoryPath)
@@ -138,11 +140,11 @@ public static class Splitter
 
 ```csharp
 [TestClass]
-public class SplitterTests
+public sealed class SplitterTests
 {
-    private static readonly string DirectoryPath = @"..\..\..\data";
-    private static readonly string InputFilePath = $@"{DirectoryPath}\123_PB.pdf";
-    private static readonly string OutputFilePath = $@"{DirectoryPath}\123.pdf";
+    private static readonly string RelativeDirectoryPath = @"..\..\..\data";
+    private static readonly string RelativeInputFilePath = $@"{RelativeDirectoryPath}\123_PB.pdf";
+    private static readonly string RelativeOutputFilePath = $@"{RelativeDirectoryPath}\123.pdf";
 
     private static void OpenWithDefaultReader(string path)
     {
@@ -157,27 +159,27 @@ public class SplitterTests
     [TestInitialize]
     public void TestInitialize()
     {
-        if (File.Exists(OutputFilePath))
+        if (File.Exists(RelativeOutputFilePath))
         {
-            File.Delete(OutputFilePath);
+            File.Delete(RelativeOutputFilePath);
         }
     }
 
     [TestMethod]
     public void TestGetInputFilePaths()
     {
-        IEnumerable<string> inputFilePaths = Splitter.GetInputFilePaths(DirectoryPath);
-        string absolutePath = new FileInfo(InputFilePath).FullName;
-        Assert.IsTrue(inputFilePaths.Contains(absolutePath));
+        IEnumerable<string> inputFilePaths = Splitter.GetInputFilePaths(RelativeDirectoryPath);
+        string absoluteInputFilePath = new FileInfo(RelativeInputFilePath).FullName;
+        Assert.IsTrue(inputFilePaths.Contains(absoluteInputFilePath));
     }
 
     [TestMethod]
     [Ignore("Validated manually")]
     public void TestSplit()
     {
-        Splitter.Split(InputFilePath);
-        Assert.IsTrue(File.Exists(OutputFilePath));
-        OpenWithDefaultReader(OutputFilePath);
+        string absoluteOutputFilePath = Splitter.Split(RelativeInputFilePath);
+        Assert.IsTrue(File.Exists(absoluteOutputFilePath));
+        OpenWithDefaultReader(absoluteOutputFilePath);
     }
 }
 ```

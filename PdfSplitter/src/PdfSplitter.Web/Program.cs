@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace PdfSplitter.Web
 {
-    public class Program
+    public sealed class Program
     {
         public static void Main(string[] args)
         {

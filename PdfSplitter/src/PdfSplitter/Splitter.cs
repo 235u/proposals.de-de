@@ -16,18 +16,20 @@ namespace PdfSplitter
 
         static Splitter() => Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-        public static void Split(string inputFilePath)
+        public static string Split(string inputFilePath)
         {
+            string outputFilePath = GetOutputFilePath(inputFilePath);
             using (PdfDocument input = PdfReader.Open(inputFilePath, PdfDocumentOpenMode.Import))
             {
                 PdfPage firstPage = input.Pages[0];
                 using (var output = new PdfDocument())
                 {
-                    output.AddPage(firstPage);
-                    string outputFilePath = GetOutputFilePath(inputFilePath);
+                    output.AddPage(firstPage);                    
                     output.Save(outputFilePath);
                 }
             }
+
+            return outputFilePath;
         }
 
         public static IEnumerable<string> GetInputFilePaths(string directoryPath)

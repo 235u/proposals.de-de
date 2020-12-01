@@ -20,6 +20,8 @@
     <RepositoryUrl>https://github.com/235u/proposals.de-de/tree/master/PdfSplitter</RepositoryUrl>
 
     <NeutralLanguage>en</NeutralLanguage>
+
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
