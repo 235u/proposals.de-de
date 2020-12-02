@@ -1,6 +1,6 @@
 # Automatisches PDF-Splitting
 
-S. https://www.twago.de/project/automatisches-pdf-splitting/163969/
+S. https://www.twago.de/project/automatisches-pdf-splitting/163969/ (bzw. [Druckversion](src/PdfSplitter.Tests/data/123_PB.pdf))
 
 ## Umsetzung
 
