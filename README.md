@@ -1,4 +1,4 @@
-# Twago Proposals
+# Twago Proposals, Selection
 
 Submitted for projects posted on [Twago](https://www.twago.de)
 
